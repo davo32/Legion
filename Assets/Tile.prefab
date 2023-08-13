@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7627893030733862649}
   - component: {fileID: 7627893030733862406}
   - component: {fileID: 7627893030733862407}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tile
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 7627893031782836056}
   - component: {fileID: 7627893031782836057}
   - component: {fileID: 7627893031782836070}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 7627893032424057326}
   - component: {fileID: 7627893032424057327}
   - component: {fileID: 7627893032424057324}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

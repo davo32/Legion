@@ -3,30 +3,36 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public GridSquare Data = new GridSquare();
+    public TileData Data = new TileData();
 
-    public TextMeshPro MoveAddIndicator;
     public TileType _tileType;
-    private Player Player;
+    private Unit OccupiedUnit;
     private GameObject TileCentre;
 
     private void Awake()
     {
-        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         TileCentre = gameObject.transform.GetChild(0).gameObject;
-        Data.SetTileType(_tileType);
 
+        RaycastHit hit;
+        LayerMask layermask = LayerMask.GetMask("Unit");
+
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity, layermask))
+        {
+            if (hit.collider.CompareTag("Unit"))
+            {
+                OccupiedUnit = hit.collider.gameObject.GetComponent<Unit>();
+            }
+        }
+
+        Data.SetTileType(_tileType);
         switch (Data.GetTileType())
         {
             case TileType.NORMAL:
                 {
-                    MoveAddIndicator.gameObject.SetActive(false);
                     break;
                 }
             case TileType.PICKUP:
                 {
-                    MoveAddIndicator.gameObject.SetActive(true);
-                    MoveAddIndicator.text = Data.GetMovesToAdd().ToString();
                     break;
                 }
         }
@@ -34,26 +40,28 @@ public class Tile : MonoBehaviour
 
     void MoveToTile()
     {
-        Debug.Log($"Distance: {Player.GetComponent<Player>().CheckInDistance(gameObject.transform.position, Player.walkDistance)}");
+        //checks to see if Occupied Unit exists
+        //Checks to see if the Occupied Unit can move
+        if (OccupiedUnit == null || !OccupiedUnit.canMove) 
+            return;
         
-        if (Player.playerData.GetAllowedMoves() > 0)
+        Debug.Log($"Distance: {OccupiedUnit.GetComponent<Unit>().CheckInDistance(gameObject.transform.position, OccupiedUnit.walkDistance)}");
+
+        if (OccupiedUnit.CheckInDistance(this.transform.position, OccupiedUnit.walkDistance))
         {
-            if (Player.CheckInDistance(this.transform.position, Player.walkDistance))
-            {
-                Player.playerData.GetCurrentTile().Data.SetTileState(TileState.UNOCCUPIED);
-                Player.transform.position = new Vector3(this.transform.position.x, Player.transform.position.y, this.transform.position.z);
-                Player.playerData.SetCurrentTile(this.gameObject);
-                Player.playerData.GetCurrentTile().Data.SetTileState(TileState.CURRENTTILE);
-                Player.playerData.GetCurrentTile().Data.TypeLogic(Player, this);
-                Player.playerData.AddAllowedMoves(-1);
-            }
+          OccupiedUnit.unitData.GetCurrentTile().Data.SetTileState(TileState.UNOCCUPIED);
+          OccupiedUnit.transform.position = new Vector3(this.transform.position.x, OccupiedUnit.transform.position.y, this.transform.position.z);
+          OccupiedUnit.unitData.SetCurrentTile(this.gameObject);
+          OccupiedUnit.unitData.GetCurrentTile().Data.SetTileState(TileState.CURRENTTILE);
+          OccupiedUnit.unitData.GetCurrentTile().Data.TypeLogic(OccupiedUnit, this);
+          OccupiedUnit.canMove = false;
         }
     }
 
    
     private void OnMouseOver()
     {
-        TileCentre.GetComponent<MeshRenderer>().material.color = Data.StateLogic(Player,this.gameObject);
+        TileCentre.GetComponent<MeshRenderer>().material.color = Data.StateLogic(OccupiedUnit,this.gameObject);
 
         if (Input.GetMouseButtonUp(0))
         {

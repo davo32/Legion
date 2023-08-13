@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Data For the player
-public class PlayerData 
+[CreateAssetMenu(menuName = "CreateUnit",fileName = "newUnit")]
+public class UnitData :ScriptableObject
 {
-    public PlayerData() { }
-    public PlayerData(int MaxHP) 
-    {
-        MaxHealth = MaxHP;
-        CurrHealth = MaxHealth;
-        currTile = null;
-        AllowedMoves = 10;
-    }
+    //Modifiable Stats
+    public string UnitName;
+    [TextArea(10,20)]
+    public string UnitDescription;
 
-   
+    public Sprite UnitImage;
 
-    private int CurrHealth;
-    private int MaxHealth;
+   //used to set the health at the start of the game
+    public int Health;
+    public int Damage;
+    public int Defense;
+
+
     private int AllowedMoves;
     private Tile currTile;
+
 
     public void AddAllowedMoves(int allowedMoves)
     { 

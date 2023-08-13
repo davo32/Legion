@@ -13,9 +13,9 @@ public enum TileType
     NORMAL,
     PICKUP
 }
-public class GridSquare 
+public class TileData 
 {
-    public GridSquare() { }
+    public TileData() { }
     
     private Color PanelColor = Color.blue;
     private TileState tileState = TileState.UNOCCUPIED;
@@ -40,7 +40,7 @@ public class GridSquare
         return tileType;
     }
 
-    public void TypeLogic(Player player, Tile tile)
+    public void TypeLogic(Unit player, Tile tile)
     {
         switch (tileType)
         {
@@ -51,16 +51,13 @@ public class GridSquare
                 }
             case TileType.PICKUP: 
                 {
-                    player.playerData.AddAllowedMoves(GetMovesToAdd());
-                    tile.MoveAddIndicator.gameObject.SetActive(false);
-                    tileType = TileType.NORMAL;
                     break;
                 }
         }
     }
-    public Color StateLogic(Player player, GameObject tile)
+    public Color StateLogic(Unit player, GameObject tile)
     {
-        if (player.playerData.GetAllowedMoves() <= 0)
+        if (player == null || !player.canMove)
         {
             return PanelColor = Color.red;
         }
@@ -74,7 +71,7 @@ public class GridSquare
                     }
                 case TileState.UNOCCUPIED:
                     {
-                        if (Vector3.Distance(player.playerData.GetCurrentTile().transform.position, tile.transform.position) <= player.walkDistance)
+                        if (Vector3.Distance(player.unitData.GetCurrentTile().transform.position, tile.transform.position) <= player.walkDistance)
                         {
                             PanelColor = Color.green;
                         }
