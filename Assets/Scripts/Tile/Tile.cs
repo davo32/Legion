@@ -42,7 +42,7 @@ public class Tile : MonoBehaviour
     {
         //checks to see if Occupied Unit exists
         //Checks to see if the Occupied Unit can move
-        if (OccupiedUnit == null || !OccupiedUnit.canMove) 
+        if (OccupiedUnit == null || !OccupiedUnit.canMove /*|| OccupiedUnit.unitData.GetCurrentTile().Data.GetTileState() == TileState.CURRENTTILE*/) 
             return;
         
         Debug.Log($"Distance: {OccupiedUnit.GetComponent<Unit>().CheckInDistance(gameObject.transform.position, OccupiedUnit.walkDistance)}");
@@ -61,6 +61,8 @@ public class Tile : MonoBehaviour
    
     private void OnMouseOver()
     {
+        OccupiedUnit = GameManager.Instance.PlayerActiveUnit;
+
         TileCentre.GetComponent<MeshRenderer>().material.color = Data.StateLogic(OccupiedUnit,this.gameObject);
 
         if (Input.GetMouseButtonUp(0))
