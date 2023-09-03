@@ -1,12 +1,13 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
     public TileData Data = new TileData();
-
+    
     public TileType _tileType;
-    private Unit OccupiedUnit;
+    private UnitMovement OccupiedUnit;
     private GameObject TileCentre;
 
     private void Awake()
@@ -20,7 +21,7 @@ public class Tile : MonoBehaviour
         {
             if (hit.collider.CompareTag("Unit"))
             {
-                OccupiedUnit = hit.collider.gameObject.GetComponent<Unit>();
+                OccupiedUnit = hit.collider.gameObject.GetComponent<UnitMovement>();
             }
         }
 
@@ -45,16 +46,13 @@ public class Tile : MonoBehaviour
         if (OccupiedUnit == null || !OccupiedUnit.canMove /*|| OccupiedUnit.unitData.GetCurrentTile().Data.GetTileState() == TileState.CURRENTTILE*/) 
             return;
         
-        Debug.Log($"Distance: {OccupiedUnit.GetComponent<Unit>().CheckInDistance(gameObject.transform.position, OccupiedUnit.walkDistance)}");
+        Debug.Log($"Distance: {OccupiedUnit.GetComponent<UnitMovement>().CheckInDistance(gameObject.transform.position, OccupiedUnit.walkDistance)}");
 
         if (OccupiedUnit.CheckInDistance(this.transform.position, OccupiedUnit.walkDistance))
         {
-          OccupiedUnit.unitData.GetCurrentTile().Data.SetTileState(TileState.UNOCCUPIED);
-          OccupiedUnit.transform.position = new Vector3(this.transform.position.x, OccupiedUnit.transform.position.y, this.transform.position.z);
-          OccupiedUnit.unitData.SetCurrentTile(this.gameObject);
-          OccupiedUnit.unitData.GetCurrentTile().Data.SetTileState(TileState.CURRENTTILE);
-          OccupiedUnit.unitData.GetCurrentTile().Data.TypeLogic(OccupiedUnit, this);
-          OccupiedUnit.canMove = false;
+          OccupiedUnit.isMoving = true;
+          OccupiedUnit.targetTile = this;
+          
         }
     }
 
@@ -62,10 +60,11 @@ public class Tile : MonoBehaviour
     private void OnMouseOver()
     {
         OccupiedUnit = GameManager.Instance.PlayerActiveUnit;
-
+        
+        TileCentre.SetActive(true);
         TileCentre.GetComponent<MeshRenderer>().material.color = Data.StateLogic(OccupiedUnit,this.gameObject);
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonDown(0) && Data.GetTileState() == TileState.UNOCCUPIED)
         {
             MoveToTile();
         }
@@ -74,7 +73,8 @@ public class Tile : MonoBehaviour
     private void OnMouseExit()
     {
         TileCentre.GetComponent<MeshRenderer>().material.color = Color.black;
+        TileCentre.SetActive(false);
     }
 
-   
+    
 }

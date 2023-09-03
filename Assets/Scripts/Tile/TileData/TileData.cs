@@ -40,7 +40,7 @@ public class TileData
         return tileType;
     }
 
-    public void TypeLogic(Unit player, Tile tile)
+    public void TypeLogic(UnitMovement player, Tile tile)
     {
         switch (tileType)
         {
@@ -55,7 +55,7 @@ public class TileData
                 }
         }
     }
-    public Color StateLogic(Unit player, GameObject tile)
+    public Color StateLogic(UnitMovement player, GameObject tile)
     {
         if (player == null || !player.canMove)
         {
@@ -71,7 +71,7 @@ public class TileData
                     }
                 case TileState.UNOCCUPIED:
                     {
-                        if (Vector3.Distance(player.unitData.GetCurrentTile().transform.position, tile.transform.position) <= player.walkDistance)
+                        if (Vector3.Distance(player.GetCurrentTile().transform.position, tile.transform.position) <= player.walkDistance)
                         {
                             PanelColor = Color.green;
                         }
