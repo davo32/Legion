@@ -1,2 +1,3 @@
-# Wild Magic
-A game where you crawl dungeons!
+# Legion
+Tile Based Combat Game
+Create a legion and command it into battle!
