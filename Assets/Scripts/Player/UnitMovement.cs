@@ -15,8 +15,8 @@ public class UnitMovement : MonoBehaviour
     //Current tile unit is on
     private Tile _currTile;
     public Tile targetTile;
-    
 
+    private Vector3 targetPos;
 
     private void Start()
     {
@@ -62,8 +62,8 @@ public class UnitMovement : MonoBehaviour
         if (isMoving)
         {
             var step = _speed * Time.deltaTime;
-            Vector3 targetPos = new Vector3(targetTile.transform.position.x, targetTile.transform.position.y + 0.66f,
-                targetTile.transform.position.z);
+
+            targetPos = new Vector3(targetTile.transform.position.x, targetTile.transform.position.y + 0.66f, targetTile.transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
 
             if (Vector3.Distance(transform.position, targetPos) < 0.001f)
@@ -75,4 +75,5 @@ public class UnitMovement : MonoBehaviour
             }
         }
     }
+    
 }

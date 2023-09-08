@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7256361244997790190}
+  m_Father: {fileID: 1602288272234961193}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1941818895867106868
@@ -59,7 +59,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectHighlights: 0
-  TargetTile: {fileID: 0}
   direction: 3
 --- !u!1 &1337299218211444457
 GameObject:
@@ -91,7 +90,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7256361244997790190}
+  m_Father: {fileID: 1602288272234961193}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &2701760579577850464
@@ -120,7 +119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectHighlights: 0
-  TargetTile: {fileID: 0}
   direction: 2
 --- !u!1 &1555465638099264388
 GameObject:
@@ -152,7 +150,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7256361244997790190}
+  m_Father: {fileID: 1602288272234961193}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1006103927218497183
@@ -181,7 +179,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectHighlights: 0
-  TargetTile: {fileID: 0}
   direction: 1
 --- !u!1 &1602288272234706067
 GameObject:
@@ -214,7 +211,10 @@ Transform:
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7256361244997790190}
+  - {fileID: 3911174992550381982}
+  - {fileID: 1762964868759562120}
+  - {fileID: 6116544974793574541}
+  - {fileID: 6527010142325535111}
   - {fileID: 5897602262444739815}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -283,41 +283,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43171223301712914, guid: 557b68965edd4424aaeab357f78c51af, type: 2}
---- !u!1 &3344689250110783755
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7256361244997790190}
-  m_Layer: 7
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7256361244997790190
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3344689250110783755}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3911174992550381982}
-  - {fileID: 1762964868759562120}
-  - {fileID: 6116544974793574541}
-  - {fileID: 6527010142325535111}
-  m_Father: {fileID: 1602288272234961193}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5897602261345451387
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,7 +587,7 @@ Transform:
   - {fileID: 5897602261786227697}
   - {fileID: 5897602261345451332}
   m_Father: {fileID: 1602288272234961193}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5897602262444739812
 MeshFilter:
@@ -730,7 +695,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7256361244997790190}
+  m_Father: {fileID: 1602288272234961193}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2128578166686195584
@@ -744,8 +709,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.040489435}
-  m_Center: {x: 0, y: 0, z: 0.04605949}
+  m_Size: {x: 0.778237, y: 0.7815525, z: 0.20739436}
+  m_Center: {x: -0.0041630864, y: -0.009578541, z: 0.12951195}
 --- !u!114 &7077172887236882817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -759,5 +724,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectHighlights: 0
-  TargetTile: {fileID: 0}
   direction: 4

@@ -3,11 +3,12 @@ using UnityEngine;
 public class BoxMoveInteractable : MouseInteractable
 {
    private Transform _box;
-   private float _movespeed = 1.0f;
+   private readonly float _moveSpeed = 1.0f;
    private bool _canPush;
 
    private Vector3 _targetPosition;
 
+   private bool _finalPos;
    public Direction direction = Direction.None;
    public enum Direction
    {
@@ -20,13 +21,15 @@ public class BoxMoveInteractable : MouseInteractable
 
    public void OnMouseEnter()
    {
-      _box.gameObject.GetComponent<MeshRenderer>().material.color =
-         PlayerInRange() ? HighlightedColor[(int)objectHighlights] : DisabledColor;
       
-      if (Input.GetMouseButtonDown(0) && PlayerInRange())
-      {
-         Interact();
-      }
+         _box.gameObject.GetComponent<MeshRenderer>().material.color =
+            PlayerInRange() ? HighlightedColor[(int)objectHighlights] : DisabledColor;
+
+         if (Input.GetMouseButtonDown(0) && PlayerInRange() && !_finalPos)
+         {
+            Interact();
+         }
+      
    }
 
    public override void OnMouseExit()
@@ -36,8 +39,8 @@ public class BoxMoveInteractable : MouseInteractable
 
    public override void Start()
    {
-      base.Start();
-      _box = transform.parent.parent.gameObject.transform;
+      mr = GetComponentInParent<MeshRenderer>();
+      _box = transform.parent.transform;
    }
 
    public override void Interact()
@@ -51,7 +54,7 @@ public class BoxMoveInteractable : MouseInteractable
       if (_canPush)
       {
          //Move our position a step closer to the target
-         var step = _movespeed * Time.deltaTime; // calculate distance to move
+         var step = _moveSpeed * Time.deltaTime; // calculate distance to move
          _box.transform.position = Vector3.MoveTowards(_box.position, _targetPosition, step);
 
          //Check if the position of the Box and target position are approximately equal.
@@ -89,7 +92,18 @@ public class BoxMoveInteractable : MouseInteractable
       }
    }
 
+   private void OnCollisionStay(Collision other)
+   {
+      if (!other.gameObject.CompareTag("Wall")) return;
+      Debug.Log("Final Position");
+      _finalPos = true;
+   }
+   
 }
+
+
+
+
 
 //TODO:
 //create script on each empty

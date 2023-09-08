@@ -46,12 +46,11 @@ public class Tile : MonoBehaviour
         if (OccupiedUnit == null || !OccupiedUnit.canMove /*|| OccupiedUnit.unitData.GetCurrentTile().Data.GetTileState() == TileState.CURRENTTILE*/) 
             return;
         
-        Debug.Log($"Distance: {OccupiedUnit.GetComponent<UnitMovement>().CheckInDistance(gameObject.transform.position, OccupiedUnit.walkDistance)}");
 
         if (OccupiedUnit.CheckInDistance(this.transform.position, OccupiedUnit.walkDistance))
         {
           OccupiedUnit.isMoving = true;
-          OccupiedUnit.targetTile = this;
+          //OccupiedUnit.targetTile = this;
           
         }
     }

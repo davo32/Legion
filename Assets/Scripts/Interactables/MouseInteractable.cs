@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using NovaUtils;
 
 public enum ObjectHighlight
 {
@@ -17,7 +15,7 @@ public class MouseInteractable : Interactable
     [SerializeField] protected ObjectHighlight objectHighlights = ObjectHighlight.GREEN;
     protected readonly List<Color> HighlightedColor = new List<Color>();
     protected readonly Color DisabledColor = Color.red;
-    private MeshRenderer _mr;
+    protected MeshRenderer mr;
 
     private void OnEnable()
     {
@@ -30,11 +28,11 @@ public class MouseInteractable : Interactable
 
     public virtual void Start()
     {
-        _mr = GetComponent<MeshRenderer>();
+        mr = GetComponent<MeshRenderer>();
     }
     public virtual void OnMouseOver()
     {
-        _mr.material.color = PlayerInRange() ? HighlightedColor[(int)objectHighlights] : DisabledColor;
+        mr.material.color = PlayerInRange() ? HighlightedColor[(int)objectHighlights] : DisabledColor;
 
         if (Input.GetMouseButtonDown(0) && PlayerInRange())
         {
@@ -44,7 +42,7 @@ public class MouseInteractable : Interactable
 
     public virtual void OnMouseExit()
     {
-        _mr.material.color = Color.white;
+        mr.material.color = Color.white;
     }
 
     public override void Interact()

@@ -19,7 +19,7 @@ public class TileMovement : MonoBehaviour
     void Update()
     {
         target01 = new Vector3(transform.position.x + 1.0f, transform.position.y, transform.position.z);
-        target01 = new Vector3(transform.position.x - 1.0f, transform.position.y, transform.position.z);
+        target02 = new Vector3(transform.position.x - 1.0f, transform.position.y, transform.position.z);
         var step = moveSpeed * Time.deltaTime;
 
         Active = swap ? target01 : target02;
