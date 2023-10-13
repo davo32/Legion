@@ -16,7 +16,6 @@ public class UnitMovement : MonoBehaviour
     private Tile _currTile;
     public Tile targetTile;
 
-    private Vector3 targetPos;
 
     private void Start()
     {
@@ -63,7 +62,7 @@ public class UnitMovement : MonoBehaviour
         {
             var step = _speed * Time.deltaTime;
 
-            targetPos = new Vector3(targetTile.transform.position.x, targetTile.transform.position.y + 0.66f, targetTile.transform.position.z);
+            Vector3 targetPos = new Vector3(targetTile.transform.position.x, targetTile.transform.position.y + 0.66f, targetTile.transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, targetPos, step);
 
             if (Vector3.Distance(transform.position, targetPos) < 0.001f)

@@ -50,7 +50,7 @@ public class Tile : MonoBehaviour
         if (OccupiedUnit.CheckInDistance(this.transform.position, OccupiedUnit.walkDistance))
         {
           OccupiedUnit.isMoving = true;
-          //OccupiedUnit.targetTile = this;
+          OccupiedUnit.targetTile = this;
           
         }
     }
